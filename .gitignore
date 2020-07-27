@@ -12,4 +12,4 @@ tmp
 
 db/*.db
 
-./db/api_key.rb
+db/api_key.rb
