@@ -50,12 +50,6 @@ def busy_season
         hash["analytics"]["travelers"]["score"] > 8
     end
 
-    # puts "Here are the slowest months of the year to travel to #{city}: "
-    
-    # slow_times.each do |hash|
-    #     puts hash["period"]
-    # end
-
     puts "Here were the busiest months in 2017:"
 
     fast_times.each do |hash|

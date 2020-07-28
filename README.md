@@ -72,11 +72,14 @@ ActiveRecord::Base.logger = nil
 3. As a user, I want to enter a city to get things to do in those places
 
 4. As a user, I should be able to save my favorite locations
+
 CLI.rb
+```
 “Hi, where would you like to go?”
 “What month would you like to travel?”
 “What city are you visiting?”
 “These are your favorite locations”
+```
 
 ---
 
