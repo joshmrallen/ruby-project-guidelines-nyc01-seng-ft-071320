@@ -8,8 +8,8 @@ class AmadeusAPI
     
     def self.amadeus
         Amadeus::Client.new({
-            client_id: AMADEUS_CLIENT_ID,
-            client_secret: AMADEUS_CLIENT_SECRET
+            client_id: ENV[AMADEUS_CLIENT_ID],
+            client_secret: ENV[AMADEUS_CLIENT_SECRET]
         })
     end
 
