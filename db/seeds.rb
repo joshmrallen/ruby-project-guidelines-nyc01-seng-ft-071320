@@ -1,5 +1,3 @@
-require_relative '../config/environment.rb'
-
 
 User.delete_all
 Location.delete_all
