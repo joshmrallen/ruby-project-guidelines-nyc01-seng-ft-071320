@@ -65,7 +65,7 @@ ActiveRecord::Base.logger = nil
 ---
 ## Vacation planning app
 
-1. As a user, I want to be able to enter places  to get a list of prospective places in a country to visit this year
+1. As a user, I want to be able to enter a city name to get a list of prospective places. 
 
 2. As a user, I want to enter a month to see if that month is a good time in the year to book a flight
 
