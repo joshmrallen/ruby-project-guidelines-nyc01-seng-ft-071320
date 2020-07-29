@@ -5,4 +5,8 @@ gem "sinatra-activerecord"
 gem "sqlite3"
 gem "pry"
 gem "require_all"
+<<<<<<< HEAD
 gem 'rake'
+=======
+gem 'dotenv'
+>>>>>>> josh

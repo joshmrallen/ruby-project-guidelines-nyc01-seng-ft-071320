@@ -1,18 +1,25 @@
-<<<<<<< HEAD
+require_relative '../config/environment.rb'
+# require 'amadeus'
+require 'pry'
+require 'require_all'
+require_relative './api/city_hashes'
+require_relative './api/api.rb'
 
-User.delete_all
-Location.delete_all
-FavoriteLocation.delete_all
+require_all 'app' 'api'
 
-location1 = Location.create(country: "USA", city: "NYC", poi: "Visit Statue of Liberty")
-location2 = Location.create(country: "France", city: "Paris", poi: "Visit Eifel Tower")
-location3 = Location.create(country:"India", city: "Uttar Pradesh", poi: "Visit Taj Mahal")
+cities = ["Bangalore", "Barcelona", "Berlin", "Dallas", "London", "New York City", "Paris", "San Francisco"]
+
+puts "Welcome! What's your name?"
+name = gets.chomp
+a = User.create(name: name)
+
+puts "Nice to meet you, #{name}! Please choose from the following cities:"
+cities.each_with_index do |city, index|
+    puts "#{index + 1} for #{city}"
+end
 
 
-george = User.create(name: "George")
-jeff = User.create(name: "Jeff")
-beth = User.create(name: "Beth")
 
-fl1 = FavoriteLocation.create(user_id: george.id, location_id: location1.id)
-fl2 = FavoriteLocation.create(user_id: jeff.id, location_id: location2.id)
-fl3 = FavoriteLocation.create(user_id: beth.id, location_id: location3.id)
+
+binding.pry
+

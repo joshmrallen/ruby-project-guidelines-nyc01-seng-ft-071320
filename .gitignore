@@ -11,5 +11,6 @@ tmp
 *.swp
 
 db/*.db
-
 db/api_key.rb
+
+*.env

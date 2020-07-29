@@ -65,73 +65,62 @@ ActiveRecord::Base.logger = nil
 ---
 ## Vacation planning app
 
+<<<<<<< HEAD
 1. As a user, I want to be able to enter a city name to get a list of prospective places. 
+=======
+1. As a user, I want to be able to enter a city  to get a list of prospective sights to see.
+>>>>>>> josh
 
-2. As a user, I want to enter a month to see if that month is a good time in the year to book a flight
+2. As a user, I want to enter a month to see if that month is a good time in the year to book a flight.
 
-3. As a user, I want to enter a city to get things to do in those places
+3. As a user, I want to enter a city to get a list of hotels.
 
-4. As a user, I should be able to save my favorite locations
+4. As a user, I should be able to save my favorite locations.
+
 CLI.rb
+```
 “Hi, where would you like to go?”
 “What month would you like to travel?”
 “What city are you visiting?”
 “These are your favorite locations”
+```
+### Points of Interest
+* API free test version only allows calls to a select list of cities for POI data: https://github.com/amadeus4dev/data-collection/blob/master/data/pois.md
+```
+Bangalore
+Latitude North: 13.023577, Longitude West: 77.536856, Latitude South: 12.923210, Longitude East: 77.642256
 
+Barcelona
+Latitude North: 41.42, Longitude West: 2.11, 
+Latitude South: 41.347463, Longitude East: 2.228208
+
+Berlin
+Latitude North: 52.541755, Longitude West: 13.354201, Latitude South: 52.490569, Longitude East: 13.457198
+
+Dallas
+Latitude North: 32.806993, Longitude West: -96.836857, Latitude South: 32.740310, Longitude East: -96.737293
+
+London
+Latitude North: 51.520180, Longitude West: -0.169882, Latitude South: 51.484703, Longitude East: -0.061048
+
+New York
+Latitude North: 40.792027, Longitude West: -74.058204, Latitude South: 40.697607, Longitude East: -73.942847
+
+Paris
+Latitude North: 48.91, Longitude West: 2.25, 
+Latitude South: 48.80, Longitude East: 2.46
+
+San Francisco
+Latitude North: 37.810980, Longitude West: -122.483716, 
+Latitude South: 37.732007, Longitude East: -122.370076
+
+```
 ---
 
-# Vacation Safe
-## The Safe Vacation Planning App
-1. As a user, I want to see the safest places to stay in a specified city. The app will do this by returning the neighborhoods with the lowest crime rates.
+# Relationships
+User >--- UserLocation ---< Location
 
-
----
-## Which Day in History?
---- 
-## Introduction
-* Returns a historical fact for a date provided
-
-## API
-* Utilizes the 'Today in History' API
-* url: https://history.muffinlabs.com/
-
-## User Stories
-1. As a user, I want to enter a date and receive a historical event for that date
-
-2. As a user, I want to get a random historical event for the current day of access of the app.
-
-3. As a user, I want to find the oldest histrocial event for that date
-
-4. As a user, I want to see the newest historical fact for that date
-
-5. As a user, I want to see a list who was born on the current day.
-
-6. As a user, I want to see a random historical firgure who was born on a provided day.
-
-7. As a user, I only want to see recent history after 1980.
-
-8. User wants to 
-
----
-## Relationships
-
-
-* make a User class
-    - has many :facts
-
-<!-- * TimePeriod class
-    - a historical time period
-    - can have many facts
-    - e.g., Roman, greek, China, India, Australia -->
-
-* make a Fact class
-    - has many :users
-
-* make a UserFact class (join)
-    belongs_to :User
-    belongs_to :Fact
-
-* creat a Facts table
-    - add_column :events
+Location ---< Sight
+Location ---< Hotel
 
 
