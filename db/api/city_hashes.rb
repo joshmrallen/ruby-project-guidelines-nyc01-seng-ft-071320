@@ -1,7 +1,9 @@
 #hashes of latitude and longitude box for each city accepted by the api
+#TODO: add country attr, and city attr
 
 BANGALORE = {
-    :name => "Bangalore, India",
+    :city => "Bangalore",
+    :country => "India",
     :north => 13.023577,
     :west => 77.536856,
     :south => 12.923210,
@@ -57,7 +59,7 @@ PARIS = {
 }
 
 SAN_FRANCISCO = {
-    :name => "San Francisco, CA, USA"
+    :name => "San Francisco, CA, USA",
     :north => 37.810980,
     :west => -122.483716,
     :south => 37.732007,

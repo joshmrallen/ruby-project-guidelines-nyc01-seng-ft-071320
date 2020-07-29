@@ -65,13 +65,13 @@ ActiveRecord::Base.logger = nil
 ---
 ## Vacation planning app
 
-1. As a user, I want to be able to enter places  to get a list of prospective places in a country to visit this year
+1. As a user, I want to be able to enter a city  to get a list of prospective sights to see.
 
-2. As a user, I want to enter a month to see if that month is a good time in the year to book a flight
+2. As a user, I want to enter a month to see if that month is a good time in the year to book a flight.
 
-3. As a user, I want to enter a city to get things to do in those places
+3. As a user, I want to enter a city to get a list of hotels.
 
-4. As a user, I should be able to save my favorite locations
+4. As a user, I should be able to save my favorite locations.
 
 CLI.rb
 ```

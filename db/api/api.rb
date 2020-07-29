@@ -1,9 +1,11 @@
+require_relative './api_key.rb'
+
 class AmadeusAPI
     
     def self.amadeus
         Amadeus::Client.new({
-            client_id: ENV[AMADEUS_CLIENT_ID],
-            client_secret: ENV[AMADEUS_CLIENT_SECRET]
+            client_id: AMADEUS_CLIENT_ID,
+            client_secret: AMADEUS_CLIENT_SECRET
         })
     end
 
@@ -58,6 +60,25 @@ class AmadeusAPI
         )
         response.result
     end
+
+    def self.places(city_hash)
+        poi = self.places_of_interest(city_hash)
+        sights = poi["data"].select {|hash| hash["category"] == "SIGHTS"}
+        sights.map {|hash| hash["name"]}
+    end
+
+    def self.hotels(city_code)
+        response = amadeus.shopping.hotel_offers.get(
+            cityCode: city_code
+        )
+        response.result
+    end
+
+    def self.hotels_list(city_code)
+        hotels = self.hotels(city_code)
+        hotels["data"].map {|hash| hash["hotel"]["name"]}
+    end
+    
 
 end
 
