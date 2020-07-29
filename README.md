@@ -81,7 +81,7 @@ CLI.rb
 “These are your favorite locations”
 ```
 ### Points of Interest
-* API free test version only allows calls to a select list of cities for POI data:
+* API free test version only allows calls to a select list of cities for POI data: https://github.com/amadeus4dev/data-collection/blob/master/data/pois.md
 ```
 Bangalore
 Latitude North: 13.023577, Longitude West: 77.536856, Latitude South: 12.923210, Longitude East: 77.642256
