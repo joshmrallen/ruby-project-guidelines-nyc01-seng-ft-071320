@@ -56,6 +56,7 @@ class AmadeusAPI
             south: city_hash[:south],
             east: city_hash[:east]
         )
+        response.result
     end
 
 end
