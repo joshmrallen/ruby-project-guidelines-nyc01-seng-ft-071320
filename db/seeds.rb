@@ -1,68 +1,23 @@
-require 'amadeus'
+require_relative '../config/environment.rb'
+# require 'amadeus'
 require 'pry'
-require 'json'
-require_relative 'api_key'
+require 'require_all'
+require_relative './api/city_hashes'
+require_relative './api/api.rb'
 
+require_all 'app' 'api'
 
-class AmadeusAPI
-    
-    def self.amadeus
-        Amadeus::Client.new({
-            client_id: AMADEUS_CLIENT_ID,
-            client_secret: AMADEUS_CLIENT_SECRET
-        })
-    end
+cities = ["Bangalore", "Barcelona", "Berlin", "Dallas", "London", "New York City", "Paris", "San Francisco"]
 
-    begin
-        puts amadeus.reference_data.urls.checkin_links.get({ airlineCode: 'BA'})
-    rescue Amadeus::ResponseError => error
-        puts error
-    end
+puts "Welcome! What's your name?"
+name = gets.chomp
+a = User.create(name: name)
 
-
-    # every API call returns a Amadeus::Response object.
-    # raw response string is returned with .body, parsed JSON with .result, and raw response body as .data
-    
-    def self.busy(city_code)
-        # check a flight destination's busiest period
-        # will always use 2017 for period for simplicities' sake since the period is just used to extrapulate general traffic flow for future flight-booking purposes
-        response = amadeus.travel.analytics.air_traffic.busiest_period.get(
-            cityCode: city_code,
-            period: '2017',
-            direction: Amadeus::Direction::ARRIVING
-    )
-        response.result
-    end
-         
-
+puts "Nice to meet you, #{name}! Please choose from the following cities:"
+cities.each_with_index do |city, index|
+    puts "#{index + 1} for #{city}"
 end
 
-def busy_season
-    puts "Hello, and welcome to Safe Vacation. What city would you like to go to?"
-    city = gets.chomp
-
-    raw = AmadeusAPI.busy(city)
-
-    busy = raw["data"]
-
-    #for our purposes, any score of 8 and above will be considered 'very busy'
-    fast_times = busy.select do |hash|
-        hash["analytics"]["travelers"]["score"] > 8
-    end
-
-    # puts "Here are the slowest months of the year to travel to #{city}: "
-    
-    # slow_times.each do |hash|
-    #     puts hash["period"]
-    # end
-
-    puts "Here were the busiest months in 2017:"
-
-    fast_times.each do |hash|
-        puts "#{hash["period"]}"
-    end
-    
-end
 
 
 
