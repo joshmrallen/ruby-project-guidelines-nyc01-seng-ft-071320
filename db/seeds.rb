@@ -1,5 +1,5 @@
 require_relative '../config/environment.rb'
-# require 'amadeus'
+require 'amadeus'
 require 'pry'
 require 'require_all'
 require_relative './api/city_hashes'
@@ -19,7 +19,7 @@ cities.each_with_index do |city, index|
 end
 
 
-
+# OMG errors
 
 binding.pry
 
