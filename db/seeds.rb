@@ -19,6 +19,6 @@ cities.each_with_index do |city, index|
 end
 
 
-
+# OMG errors
 
 binding.pry
