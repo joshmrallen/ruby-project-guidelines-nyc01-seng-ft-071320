@@ -113,24 +113,10 @@ Latitude South: 37.732007, Longitude East: -122.370076
 ```
 ---
 
+# Relationships
+User >--- UserLocation ---< Location
 
-
-* make a User class
-    - has many :facts
-
-<!-- * TimePeriod class
-    - a historical time period
-    - can have many facts
-    - e.g., Roman, greek, China, India, Australia -->
-
-* make a Fact class
-    - has many :users
-
-* make a UserFact class (join)
-    belongs_to :User
-    belongs_to :Fact
-
-* creat a Facts table
-    - add_column :events
+Location ---< Sight
+Location ---< Hotel
 
 

@@ -10,17 +10,26 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_28_175541) do
+ActiveRecord::Schema.define(version: 2020_07_29_192124) do
 
   create_table "favorite_locations", force: :cascade do |t|
     t.integer "location_id"
     t.integer "user_id"
   end
 
+  create_table "hotels", force: :cascade do |t|
+    t.integer "location_id"
+    t.string "name"
+  end
+
   create_table "locations", force: :cascade do |t|
     t.string "country"
-    t.string "hotspot"
-    t.string "things_to_do"
+    t.string "city"
+  end
+
+  create_table "sights", force: :cascade do |t|
+    t.integer "location_id"
+    t.string "name"
   end
 
   create_table "users", force: :cascade do |t|
