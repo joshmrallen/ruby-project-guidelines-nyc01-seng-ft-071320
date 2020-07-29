@@ -1,7 +1,7 @@
 require 'bundler'
 require 'require_all'
-# require 'pry'
 # require 'amadeus'
+require_relative '../app/models/'
 
 Bundler.require
 
