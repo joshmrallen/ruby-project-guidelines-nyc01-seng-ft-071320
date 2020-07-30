@@ -33,99 +33,81 @@ end
 
 def features
     [
-        "See the Best Times for Travel",
+        "Best Times for Travel",
         "Sights to See",
         "Hotels to Stay At",
+        "My Favorite Destinations",
+        "Other Destinations",
         "Exit"
     ]
 end
 
 
 def run(features)
+    system("clear")
     prompt = TTY::Prompt.new
     current_user = welcome_message
 
     choice = 0
     city_choice = 0
     while city_choice != cities[8]
-        city_choice = prompt.select("\nPlease choose your destination.\n", cities)
+        city_choice = prompt.select("\nPlease choose your destination.\n", cities, per_page: 9)
 
-        city = city_hash[city_choice]
-        # city_code = city_hash[city_choice][:code] # upon Exit, throws undefined method NoMethodError '[]' for nil:NilClass
-        location = Location.find_by(city: city_choice)
+        if city_choice == "Exit"
+            puts "Have a nice day!"
+        else
+            city = city_hash[city_choice]
+            city_code = city_hash[city_choice][:code] # upon Exit, throws NoMethodError '[]' for nil:NilClass because city_hash[city_choice] returns 'nil'
+            location = Location.find_by(city: city_choice)
+            #location not updating with city_choice -- why?
 
-
-        while choice != features[3]
-            choice = prompt.select("\nWhat would you like to do?\n", features)
-
-            case choice
-            when features[0]
-                months = AmadeusAPI.slow_season(city_code)
-                if months == []
-                    puts "\nYou're in luck! That location is slow all year-round.\n"
-                else
-                    puts "\nHere are the best months to travel to #{city_choice}:\n"
-                    months.each {|month| puts month}
-                end
-                favorite(current_user, location, prompt)
-            when features[1]
-                puts "\nHere are a few place to visit in #{city_choice}:\n"
-                sights = location.get_sights
-                sights.each {|sight| puts sight}
-                favorite(current_user, location, prompt)
-            when features[2]
-                puts "\nHere are a few places to stay at in #{city_choice}:\n"
-                hotels = location.get_hotels
-                if hotels == []
-                    "\nPlease check back later for participating Hotels.\n"
-                else 
-                    hotels.each {|hotel| puts hotel} # Bangalore currently returning empty array
+            while choice != features[5]
+                choice = prompt.select("\nWhat would you like to see?\n", features)
+    
+                case choice
+                when features[0] #best times for travel
+                    months = AmadeusAPI.slow_season(city_code)
+                    if months == []
+                        puts "\nYou're in luck! That location is slow all year-round.\n"
+                    else
+                        puts "\nHere are the best months to travel to #{city_choice}:\n"
+                        months.each {|month| puts month}
+                    end
                     favorite(current_user, location, prompt)
+                when features[1] #sights to see
+                    puts "\nHere are a few place to visit in #{city_choice}:\n\n"
+                    sights = location.get_sights
+                    sights.each {|sight| puts sight}
+                    favorite(current_user, location, prompt)
+                when features[2] #hotels to stay at
+                    puts "\nHere are a few places to stay at in #{city_choice}:\n\n"
+                    hotels = location.get_hotels
+                    if hotels.empty?
+                        "\nPlease check back later for participating Hotels.\n\n"
+                    else 
+                        hotels.each {|hotel| puts hotel} # Bangalore currently returning empty array
+                        favorite(current_user, location, prompt)
+                    end
+                when features [3] #my favorite destinations -- ERROR - favorites only saves the first destination choice -- location probably isn't updating when city_choice is called
+                    puts "\n Here's a list of your favorite destinations:\n"
+                    if current_user.locations.empty?
+                        puts "\nYou don't have any favorites yet!\n"
+                        city_choice = prompt.select("\nPlease choose your destination.\n", cities, per_page: 9)
+                    else
+                        current_user.locations.each {|location| puts "\n#{location.city}\n"}
+                    end
+                when features [4] #other destinations
+                    city_choice = prompt.select("\nPlease choose your destination.\n", cities, per_page: 9)
+                    # location = Location.find_by(city: city_choice)
+                else
+                    # choice = prompt.select("\nWhat would you like to see?\n", features)
                 end
-            else
-                # puts "\nThat is not a valid choice.\n"
+            
             end
-        
+             # throws undefined NoMethod error when Exit is chosen in outer while loop
         end
-         # throws undefined NoMethod error when Exit is chosen in outer while loop
+        # binding.pry
     end     
-
-
-    # city_choice = cities_selector
-
-    # code = city_hash[cities[city_choice]][:code]
-    # city = city_hash[cities[city_choice]]
-    # location = Location.find_by(city: city[:name])
-
-    # activity_choice = activities
-
-    # case activity_choice
-    # when "1"
-    #     months = AmadeusAPI.slow_season(code)
-    #     if months == []
-    #         puts "That location is slow year-round."
-    #     else
-    #         months.each {|month| puts month}
-    #     end
-    # when "2"
-    #     sights = AmadeusAPI.places(city)
-    #     sights.each {|poi| puts poi}
-    # when "3"
-    #     hotels = location.get_hotels
-    #     hotels.each {|hotel| puts hotel}
-    # else
-    #     puts "That is not a valid choice."
-    # end
-
-    # option = favorites
-
-    # if option == "y" || option == "Y"
-    #     user.locations << location
-    # elsif option == "n" || option =="N"
-    #     cities_selector
-    # else
-    #     puts "That's not a valid selection."
-    # end
 
 end
 
