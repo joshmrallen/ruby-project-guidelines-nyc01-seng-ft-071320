@@ -49,9 +49,9 @@ class AmadeusAPI
         slow_months.map {|hash| hash["period"]}
     end
          
-    #define a hash somewhere that includes the square lat/long for each city accepted by the test api
-    #pass that hash as an argument
+    #takes as argument a hash that includes the square lat/long for each city accepted by the test api
     def self.places_of_interest(city_hash)
+        city_name = city_hash.keys[0]
         response = amadeus.reference_data.locations.points_of_interest.by_square.get(
             north: city_hash[:north],
             west: city_hash[:west],

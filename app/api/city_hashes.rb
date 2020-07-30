@@ -5,6 +5,7 @@ def city_hash
     {
         "Bangalore" => {
             :code => "BLR",
+            :name => "Bangalore",
             :country => "India",
             :north => 13.023577,
             :west => 77.536856,
@@ -13,7 +14,8 @@ def city_hash
         },
         "Barcelona" => {
             :code => "BCN",
-            :county => "Spain",
+            :name => "Barcelona",
+            :country => "Spain",
             :north => 41.42,
             :west => 2.11,
             :south => 41.347463,
@@ -21,6 +23,7 @@ def city_hash
         },
         "Berlin" => {
             :code => "TXL",
+            :name => "Berlin",
             :country => "Germany",
             :north => 52.541755,
             :west => 13.354201,
@@ -29,6 +32,7 @@ def city_hash
         },
         "Dallas" => {
             :code => "DFW",
+            :name => "Dallas",
             :country => "USA",
             :north => 32.806993,
             :west => -96.836857,
@@ -36,7 +40,8 @@ def city_hash
             :east => -96.737293
         },
         "London" => { 
-            :code => "LHR",
+            :code => "LON",
+            :name => "London",
             :country => "UK",
             :north => 51.520180,
             :west => -0.169882,
@@ -44,7 +49,8 @@ def city_hash
             :east => -0.061048
         },
         "New York City" => {
-            :code => "JFK",
+            :code => "NYC",
+            :name => "New York City",
             :country => "USA",
             :north => 40.792027,
             :west => -74.058204,
@@ -52,7 +58,8 @@ def city_hash
             :east => -73.942847
         },
         "Paris" => {
-            :code => "CDG",
+            :code => "PAR",
+            :name => "Paris",
             :country => "France",
             :north => 48.91,
             :west => 2.25,
@@ -61,6 +68,7 @@ def city_hash
         },
         "San Francisco" => { 
             :code => "SFO",
+            :name => "San Francisco",
             :country => "USA",
             :north => 37.810980,
             :west => -122.483716,
