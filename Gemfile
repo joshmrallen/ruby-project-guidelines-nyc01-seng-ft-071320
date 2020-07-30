@@ -8,3 +8,4 @@ gem "require_all"
 gem 'rake'
 gem 'dotenv'
 gem "amadeus"
+gem 'tty-prompt'

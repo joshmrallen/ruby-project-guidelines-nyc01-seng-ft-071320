@@ -9,4 +9,9 @@ class Location < ActiveRecord::Base
         hotels.each {|hotel| self.hotels << Hotel.create(name: hotel)}
     end
 
+    def get_sights
+        sights = AmadeusAPI.places(city_hash[self.city])
+        sights.each {|sight| self.sights << Sight.create(name: sight)}
+    end
+
 end

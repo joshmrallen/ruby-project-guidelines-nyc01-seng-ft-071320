@@ -1,6 +1,10 @@
 require_relative '../config/environment.rb'
 
+User.delete_all
+FavoriteLocation.delete_all
 Location.delete_all
+Sight.delete_all
+Hotel.delete_all
 
 
 def seed_locations
@@ -10,14 +14,14 @@ def seed_locations
     end
 end
 
-def seed_sights
-    city_hash.each do |city|
-        name = city[0]
-        sight_list = AmadeusAPI.places(city_hash[name])
-        location = Location.all.find_by(city: city[0])
-        sight_list.each {|sight| location.sights << Sight.create(name: sight)}
-    end
-end
+# def seed_sights
+#     city_hash.each do |city|
+#         name = city[0]
+#         sight_list = AmadeusAPI.places(city_hash[name])
+#         location = Location.all.find_by(city: city[0])
+#         sight_list.each {|sight| location.sights << Sight.create(name: sight)}
+#     end
+# end
 
 # seeding all the hotels takes a long time! created a similar instance method in Location class that creates Hotel instances for the instance
 
@@ -37,7 +41,7 @@ end
 # end
 
 seed_locations
-seed_sights
+# seed_sights
 # seed_hotels
 
 
