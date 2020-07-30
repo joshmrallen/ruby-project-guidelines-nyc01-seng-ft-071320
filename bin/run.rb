@@ -51,6 +51,7 @@ def run
 
     code = city_hash[cities[city_choice]][:code]
     city = city_hash[cities[city_choice]]
+    location = Location.find_by(city: city[:name])
 
     activities
     activity_choice = gets.chomp
@@ -67,7 +68,7 @@ def run
         sights = AmadeusAPI.places(city)
         sights.each {|poi| puts poi}
     when "3"
-        hotels = AmadeusAPI.hotels_list(code)
+        hotels = location.get_hotels
         hotels.each {|hotel| puts hotel}
     else
         puts "That is not a valid choice."

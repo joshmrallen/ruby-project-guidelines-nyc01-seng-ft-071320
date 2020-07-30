@@ -19,5 +19,26 @@ def seed_sights
     end
 end
 
+# seeding all the hotels takes a long time! created a similar instance method in Location class that creates Hotel instances for the instance
+
+# def get_hotels(city_name)
+#     hotels = AmadeusAPI.hotels_list(city_hash[city_name][:code])
+#     location = Location.find_by(city: city_name)
+#     hotels.each {|hotel| location.hotels << Hotel.create(name: hotel)}
+# end
+
+# def seed_hotels
+#     city_hash.each do |city|
+#         name = city[0]
+#         hotels = AmadeusAPI.hotels_list(city_hash[name][:code])
+#         location = Location.all.find_by(city: city[0])
+#         hotels.each {|hotel| location.hotels << Hotel.create(name: hotel)}
+#     end
+# end
+
+seed_locations
+seed_sights
+# seed_hotels
+
 
 
