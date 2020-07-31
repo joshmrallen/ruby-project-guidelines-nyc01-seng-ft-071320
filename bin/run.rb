@@ -63,7 +63,7 @@ def get_user
     #check if user exists yet
 end
 
-def favorite(user, location, prompt)
+def favorite(user, location)
     favorite = $prompt.yes?("Would you like to add this city to your favorites?")
     user.locations << location
 end
@@ -158,12 +158,12 @@ def run
                         puts "\nHere are the best months to travel to #{city_choice}:\n"
                         months.each {|month| puts month}
                     end
-                    favorite(current_user, location, prompt)
+                    favorite(current_user, location)
                 when features[1] #sights to see
                     puts "\nHere are a few places to visit in #{city_choice}:\n\n"
                     sights = location.get_sights
                     sights.each {|sight| puts sight}
-                    favorite(current_user, location, prompt)
+                    favorite(current_user, location)
                 when features[2] #hotels to stay at
                     puts "\nHere are a few places to stay at in #{city_choice}:\n\n"
                     hotels = location.get_hotels
@@ -171,7 +171,7 @@ def run
                         "\nPlease check back later for participating Hotels.\n\n"
                     else 
                         hotels.each {|hotel| puts hotel} # Bangalore currently returning empty array
-                        favorite(current_user, location, prompt)
+                        favorite(current_user, location)
                     end
                 when features[3] #my favorite destinations -- ERROR - favorites only saves the first destination choice -- location probably isn't updating when city_choice is called
                     puts "\n Here's a list of your favorite destinations:\n"
