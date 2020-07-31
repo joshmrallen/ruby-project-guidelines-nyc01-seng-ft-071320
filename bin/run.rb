@@ -39,7 +39,6 @@ def cities
         "New York City", 
         "Paris", 
         "San Francisco",
-        # "Sign Out",
         "Exit"
     ]
 end
@@ -80,18 +79,6 @@ def run
     while city_choice != cities[8]
         choice = 0
         city_choice = prompt.select("\nPlease choose your destination.\n", cities, per_page: 10)
-        # hash_key = city_choice.to_s
-        # while city_choice != cities[8] #infinite loop after features while loop exits
-            #this if statement seems to only run once, only allowing the inner while loop to run for just one city_choice value
-
-            # if city_choice == "Exit"
-            #     puts "Have a nice day!"
-            # else
-                # city = city_hash[city_choice]
-                # city_code = city_hash[city_choice][:code] # upon Exit, throws NoMethodError '[]' for nil:NilClass because city_hash[city_choice] returns 'nil'
-                # location = Location.find_by(city: city_choice)
-                #location not updating with city_choice -- why?
-            # end
 
             while choice != features[4]
                 city = city_hash[city_choice]
@@ -124,11 +111,10 @@ def run
                         hotels.each {|hotel| puts hotel} # Bangalore currently returning empty array
                         favorite(current_user, location, prompt)
                     end
-                when features[3] #my favorite destinations -- ERROR - favorites only saves the first destination choice -- location probably isn't updating when city_choice is called
+                when features[3] #my favorite destinations
                     puts "\n Here's a list of your favorite destinations:\n"
                     if current_user.locations.empty?
                         puts "\nYou don't have any favorites yet!\n"
-                        # city_choice = prompt.select("\nPlease choose your destination.\n", cities, per_page: 9)
                     else
                         current_user.locations.uniq.each {|location| puts "\n#{location.city}\n"}
                     end
@@ -137,12 +123,10 @@ def run
                 end
 
             end #inner while
-            
-        # end #while not sign out
         
         # binding.pry
     end #outer while - while not exit
-binding.pry
+# binding.pry
 end #run method definition
 
 run
