@@ -50,26 +50,32 @@ Projects need to be approved prior to launching into them, so take some time to 
       - Present any code you would like to highlight.   
 7. *OPTIONAL, BUT RECOMMENDED*: Write a blog post about the project and process.
 
+
 ---
-### Common Questions:
-- How do I turn off my SQL logger?
-```ruby
-# in config/environment.rb add this line:
-ActiveRecord::Base.logger = nil
+# Vacate: The Vacation Planner Tool
+---
+## Installation
+1. Clone this repository: https://github.com/joshmrallen/ruby-project-guidelines-nyc01-seng-ft-071320
+2. Add a file called api_key.rb to the /app/api directory.
+3. 
+4. Create two variables inside of api_key.rb
+  * AMADEUS_CLIENT_ID
+  * AMADEUS_CLIENT_SECRET
+5. Either make an account on https://developers.amadeus.com/ or ask me for an api key
+6. Set the client id variable equal to the api key.
+7. Set the client secret variable to the client secet you obtain.
+8. Open command line.
+9. Type the following to run the application:
 ```
----
+ruby bin/run.rb
+```
 
-# Our Project
+## GNU General Public License
+https://www.gnu.org/licenses/gpl-3.0.html
 
-# Vacation
----
-## Vacation planning app
+## User Stories
 
-<<<<<<< HEAD
-1. As a user, I want to be able to enter a city name to get a list of prospective places. 
-=======
-1. As a user, I want to be able to enter a city  to get a list of prospective sights to see.
->>>>>>> josh
+1. As a user, I want to be able to enter a city to get a list of prospective sights to see.
 
 2. As a user, I want to enter a month to see if that month is a good time in the year to book a flight.
 
@@ -79,13 +85,14 @@ ActiveRecord::Base.logger = nil
 
 CLI.rb
 ```
-“Hi, where would you like to go?”
-“What month would you like to travel?”
-“What city are you visiting?”
-“These are your favorite locations”
+“Best Times for Travel”
+“Sights to See”
+“Hotels to Stay At”
+"My Favorite Destinations”
 ```
 ### Points of Interest
-* API free test version only allows calls to a select list of cities for POI data: https://github.com/amadeus4dev/data-collection/blob/master/data/pois.md
+* The API free test version only allows calls to a select list of cities for POI data: https://github.com/amadeus4dev/data-collection/blob/master/data/pois.md.
+See the project file ~./app/city_hashes.rb
 ```
 Bangalore
 Latitude North: 13.023577, Longitude West: 77.536856, Latitude South: 12.923210, Longitude East: 77.642256
@@ -122,5 +129,12 @@ User >--- UserLocation ---< Location
 
 Location ---< Sight
 Location ---< Hotel
+
+
+---
+# Contributor's Guide
+We are open to any contributions and improvements. Please fork only if you intend on contributing.
+
+See the CONTRIBUTING.md file in the main project directory for more information.
 
 
