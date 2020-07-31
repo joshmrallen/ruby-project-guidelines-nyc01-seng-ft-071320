@@ -14,6 +14,9 @@ def seed_locations
     end
 end
 
+josh = User.create(name: "Josh", email: "josh@josh.com", password: "12345")
+jim = User.create(name: "Jim", email: "jim@jim.com", password: "67890")
+
 # def seed_sights
 #     city_hash.each do |city|
 #         name = city[0]
