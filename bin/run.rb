@@ -1,5 +1,7 @@
 require_relative '../config/environment'
 
+$prompt = TTY::Prompt.new
+
 def banner
     system("clear")
     puts "                                                                                                                         
@@ -44,19 +46,26 @@ def cities
     ]
 end
 
-def get_name
+def welcome_message
     puts "Welcome! What's your name?"
     name = gets.chomp
-    User.create(name: name)
+end
+
+def get_user
+    name = welcome_message
+    user = User.find_by(name: name)
+    if user
+        return user
+    else
+        user = User.create(name: name, email: '', password: '')
+        return user
+    end
+    #check if user exists yet
 end
 
 def favorite(user, location, prompt)
-    favorite = prompt.yes?("Would you like to add this city to your favorites?")
+    favorite = $prompt.yes?("Would you like to add this city to your favorites?")
     user.locations << location
-end
-
-def welcome_message
-    get_name
 end
 
 def features
@@ -69,17 +78,57 @@ def features
     ]
 end
 
+#pass 'choose' or 'enter' for either 'sign_up' or 'sign_in' methods
+def password_prompt(choose_or_enter)
+    vacation = $prompt.decorate("🏝")
+    $prompt.mask("Please #{choose_or_enter} your password:", mask: vacation)
+end
+
+def email_prompt
+    $prompt.ask("Please enter your email:") do |email|
+        email.validate(/\A\w+@\w+\.\w+\Z/)
+        email.messages[:valid?] = 'Invaid email address'
+    end
+end
+
+#pass the recently created user instance
+def get_credentials(choose_or_enter)
+    email = email_prompt
+    password = password_prompt("#{choose_or_enter}")
+    credentials = {:email => email, :password => password}
+end
+
+#sign_in or sign_up
+def login_or_register(user)
+    if user.email.empty? && user.password.empty?
+        $prompt.say("\nLooks like you're a new user! Please register a new account!\n")
+        credentials = get_credentials('choose')
+        user.email = credentials[:email]
+        user.password = credentials[:password]
+    else
+        $prompt.say("\nWelcome back #{user.name}! Please sign-in below.\n")
+        credentials = get_credentials('enter')
+        existing_user = {:email => user.email, :password => user.password}
+        while credentials != existing_user
+            credentials = get_credentials('enter')
+        end
+    end
+end
+
 
 def run
-    prompt = TTY::Prompt.new
+    # prompt = TTY::Prompt.new
     banner
-    current_user = welcome_message
+    #get_user displays welcome message, prompts user for name and returns a User instance
+    current_user = get_user
+
+    login_or_register(current_user)
 
     choice = 0
     city_choice = 0
     while city_choice != cities[8]
         choice = 0
-        city_choice = prompt.select("\nPlease choose your destination.\n", cities, per_page: 10)
+        city_choice = $prompt.select("\nPlease choose your destination.\n", cities, per_page: 10)
         # hash_key = city_choice.to_s
         # while city_choice != cities[8] #infinite loop after features while loop exits
             #this if statement seems to only run once, only allowing the inner while loop to run for just one city_choice value
@@ -98,7 +147,7 @@ def run
                 city_code = city_hash[city_choice][:code]
                 location = Location.find_by(city: city_choice)
 
-                choice = prompt.select("\nWhat would you like to see?\n", features)
+                choice = $prompt.select("\nWhat would you like to see?\n", features)
 
                 case choice
                 when features[0] #best times for travel
@@ -128,7 +177,7 @@ def run
                     puts "\n Here's a list of your favorite destinations:\n"
                     if current_user.locations.empty?
                         puts "\nYou don't have any favorites yet!\n"
-                        # city_choice = prompt.select("\nPlease choose your destination.\n", cities, per_page: 9)
+                        # city_choice = $prompt.select("\nPlease choose your destination.\n", cities, per_page: 9)
                     else
                         current_user.locations.uniq.each {|location| puts "\n#{location.city}\n"}
                     end
